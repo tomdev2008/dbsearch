@@ -29,7 +29,6 @@ public class CrawlerThread extends Thread {
 					String title = linkNode.getAttributeByName("title");
 					System.out.println(title);
 					if (CheckUtil.checkWords(title)) {
-						System.out.println("true");
 						String key=Config.LINKPRE+href;
 						String value=RedisUtil.instance.get(key);
 						if(value==null){
