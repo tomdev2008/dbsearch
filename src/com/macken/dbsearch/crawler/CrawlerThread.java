@@ -42,7 +42,7 @@ public class CrawlerThread extends Thread {
 			
 			try {
 //				System.out.println("sleep");
-				this.sleep(10000);
+				this.sleep(100000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
