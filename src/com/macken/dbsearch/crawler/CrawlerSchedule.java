@@ -14,7 +14,7 @@ public class CrawlerSchedule {
 			String link=(String)iter.next();
 //			System.out.println(link);
 			CrawlerThread ct=new CrawlerThread(link);
-			ct.run();
+			ct.start();
 		}
 	}
 }
