@@ -27,7 +27,7 @@ public class CrawlerThread extends Thread {
 					TagNode linkNode = (TagNode) nodes[i];
 					String href = linkNode.getAttributeByName("href");
 					String title = linkNode.getAttributeByName("title");
-					System.out.println(title);
+//					System.out.println(title);
 					if (CheckUtil.checkWords(title)) {
 						String key=Config.LINKPRE+href;
 						String value=RedisUtil.instance.get(key);
@@ -41,7 +41,7 @@ public class CrawlerThread extends Thread {
 			}
 			
 			try {
-				System.out.println("sleep");
+//				System.out.println("sleep");
 				this.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
