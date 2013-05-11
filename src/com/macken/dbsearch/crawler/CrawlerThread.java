@@ -26,7 +26,7 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-		
+			System.out.println(link);
 			Date date = new Date();
 			String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
