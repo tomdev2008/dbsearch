@@ -45,7 +45,7 @@ public class DBUtil {
 		return res > 0;
 	}
 	public String[] getValues(String key){
-		String sql="select * from dict where key=?";
+		String sql="select value from dict where dkey=?";
 		List<String> res=DaoSupport.db.query(sql, new SingleColumnRowMapper<String>(String.class), key);
 		if(res.size()>0){
 			return res.get(0).split(",");
