@@ -14,7 +14,7 @@ public class RedisUtil {
 	private JedisPool pool;
 
 	private RedisUtil() {
-		pool = new JedisPool(new JedisPoolConfig(), "10.12.143.61", 6380, 3000);
+		pool = new JedisPool(new JedisPoolConfig(), "10.12.143.108", 6380, 3000);
 	}
 
 	public void set(String key, String value) {
@@ -24,6 +24,16 @@ public class RedisUtil {
 		} finally {
 			pool.returnResource(jedis);
 		}
+	}
+	public boolean exists(String key){
+		boolean res=false;
+		Jedis jedis = pool.getResource();
+		try {
+			res=jedis.exists(key);
+		} finally {
+			pool.returnResource(jedis);
+		}
+		return res;
 	}
 
 	public String get(String key) {
@@ -62,6 +72,7 @@ public class RedisUtil {
 		Jedis jedis = pool.getResource();
 		try {
 			jedis.sadd(key, value);
+			
 		} finally {
 			pool.returnResource(jedis);
 		}
@@ -132,7 +143,8 @@ public class RedisUtil {
 				"http://www.douban.com/group/214921/",
 				"http://www.douban.com/group/199180/" };
 		for (int i = 0; i < array.length; i++) {
-			RedisUtil.instance.addSet(Config.TOPICSET, array[i]);
+			String sql="insert into group_info(link) values(?)";
+			DaoSupport.db.update(sql, array[i]);
 		}
 	}
 
