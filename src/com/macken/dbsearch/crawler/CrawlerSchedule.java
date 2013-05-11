@@ -15,10 +15,20 @@ public class CrawlerSchedule {
 		// CrawlerThread ct=new CrawlerThread(link);
 		// ct.run();
 		// }
-		List<Group> groups = DBUtil.instance.getAllGroup();
-		for (Group g : groups) {
-			CrawlerThread ct = new CrawlerThread(g.link);
-			ct.start();
+		while(true){
+			List<Group> groups = DBUtil.instance.getAllGroup();
+			for (Group g : groups) {
+				CrawlerThread ct = new CrawlerThread(g.link);
+				ct.start();
+			}
+			try {
+				Thread.sleep(120000);//2∑÷÷”
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+		
 	}
 }

@@ -26,7 +26,7 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		
 			Date date = new Date();
 			String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
@@ -61,15 +61,5 @@ public class CrawlerThread extends Thread {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			try {
-				System.out.println("sleep " + link);
-				this.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
 	}
 }

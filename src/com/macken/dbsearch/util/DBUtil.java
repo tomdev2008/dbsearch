@@ -25,10 +25,18 @@ public class DBUtil {
 	}
 
 	public List<Topic> getAllTopic() {
-		String sql = "select * from topic_info order by create_time desc";
+		String sql = "select * from topic_info order by create_time desc limit 0,100";
 		return DaoSupport.db.query(sql, Topic.rowMapper);
 	}
 
+	public List<Topic> getManTopic(){
+		String sql = "select * from topic_info where type=1 order by create_time desc limit 0,100";
+		return DaoSupport.db.query(sql, Topic.rowMapper);
+	}
+	public List<Topic> getWomenTopic(){
+		String sql = "select * from topic_info where type=2 order by create_time desc limit 0,100";
+		return DaoSupport.db.query(sql, Topic.rowMapper);
+	}
 	public boolean add(Topic t) {
 		String sql = "insert into topic_info(id,type,link,title,create_time,date_str) values(:id,:type,:link,:title,:createTime,:dateStr)";
 		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(
