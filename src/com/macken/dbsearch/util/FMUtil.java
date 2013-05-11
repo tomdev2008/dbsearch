@@ -24,9 +24,7 @@ public class FMUtil {
 
 	public static void main(String[] args) throws IOException {
 
-		/* �����´�����ͨ������һ��Ӧ������������ִ�ж�� */
-		/* ��ȡ�򴴽�һ��ģ�� */
-
+		
 		gen();
 
 	}
@@ -34,6 +32,7 @@ public class FMUtil {
 	public static void gen() throws IOException {
 		List<Topic> topics = DBUtil.instance.getAllTopic();
 		ModelMap map = new ModelMap();
+		map.put("substr", new SubStr());
 		map.put("topics", topics);
 		genHtml(map, "index.tpl", "index.html");
 
