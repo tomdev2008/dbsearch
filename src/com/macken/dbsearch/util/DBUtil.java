@@ -2,6 +2,7 @@ package com.macken.dbsearch.util;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 
 import com.macken.dbsearch.entity.Group;
@@ -42,5 +43,13 @@ public class DBUtil {
 		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(
 				t));
 		return res > 0;
+	}
+	public String[] getValues(String key){
+		String sql="select * from dict where key=?";
+		List<String> res=DaoSupport.db.query(sql, new SingleColumnRowMapper<String>(String.class), key);
+		if(res.size()>0){
+			return res.get(0).split(",");
+		}
+		return null;
 	}
 }
