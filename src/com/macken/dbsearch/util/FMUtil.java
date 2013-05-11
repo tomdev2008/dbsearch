@@ -24,8 +24,8 @@ public class FMUtil {
 
 	public static void main(String[] args) throws IOException {
 
-		/* ¶øÒÔÏÂ´úÂëÄãÍ¨³£»áÔÚÒ»¸öÓ¦ÓÃÉúÃüÖÜÆÚÖĞÖ´ĞĞ¶à´Î */
-		/* »ñÈ¡»ò´´½¨Ò»¸öÄ£°æ */
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ğ¶ï¿½ï¿½ */
+		/* ï¿½ï¿½È¡ï¿½ò´´½ï¿½Ò»ï¿½ï¿½Ä£ï¿½ï¿½ */
 
 		gen();
 
@@ -52,9 +52,10 @@ public class FMUtil {
 		String tPath = isWindows ? "D:\\tpl" : "/search/dbsearch/tpl";
 		String oPath = isWindows ? "D:\\output" : "/search/dbsearch/html";
 		cfg.setDirectoryForTemplateLoading(new File(tPath));
+		
 		cfg.setObjectWrapper(new DefaultObjectWrapper());
 		try {
-			Template temp = cfg.getTemplate(tplPath);
+			Template temp = cfg.getTemplate(tplPath,"utf-8");
 			String filePath = oPath + "/" + outPath;
 			System.out.println("filePath:" + filePath);
 			File file = new File(filePath);
@@ -74,7 +75,7 @@ public class FMUtil {
 		return;
 	}
 
-	/** linuxÏÂÖ´ĞĞ£¬·µ»Østdout,stderr */
+	/** linuxï¿½ï¿½Ö´ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½stdout,stderr */
 	public static String exec(String command) {
 		StringBuilder stdout = new StringBuilder("run: " + command + "\n");
 		StringBuilder stderr = new StringBuilder();
