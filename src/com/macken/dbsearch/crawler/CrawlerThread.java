@@ -26,7 +26,6 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-			System.out.println(link);
 			Date date = new Date();
 			String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
@@ -40,7 +39,7 @@ public class CrawlerThread extends Thread {
 					String title = linkNode.getAttributeByName("title");
 					String id = HashUtil.getHash(href);
 					int type = 0;
-					System.out.println("href:"+href);
+					
 					if (CheckUtil.checkWords(title)) {
 						type = 1;
 					} else if (CheckUtil.checkWomenWords(title)) {
