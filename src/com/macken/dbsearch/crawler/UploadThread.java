@@ -9,7 +9,7 @@ public class UploadThread extends Thread {
 			try {
 				FMUtil.gen();
 				FMUtil.exec("scp -r /search/dbsearch/html/ root@173.231.52.194:/search/");
-				this.sleep(10 * 60 * 1000);
+				this.sleep(5 * 60 * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
