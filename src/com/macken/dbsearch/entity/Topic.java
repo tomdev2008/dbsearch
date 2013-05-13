@@ -2,8 +2,11 @@ package com.macken.dbsearch.entity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import com.macken.dbsearch.util.DateUtil;
 
 public class Topic {
 	public String id;
@@ -13,6 +16,7 @@ public class Topic {
 	public String titleHash;
 	public String dateStr;
 	public long createTime;
+	public String createTimeStr;
 
 	public String getId() {
 		return id;
@@ -65,6 +69,10 @@ public class Topic {
 
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
+	}
+	
+	public String getCreateTimeStr(){
+		return DateUtil.format(new Date(createTime), "yyyy-MM-dd HH:mm");
 	}
 
 	public static RowMapper<Topic> rowMapper = new RowMapper<Topic>() {
