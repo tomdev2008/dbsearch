@@ -35,8 +35,7 @@ public class CleanUtil {
 	public static boolean checkAvaiable(String link){
 		String content = HttpUtil.getHtmlContent(link, "utf-8");
 		String title=ExtractUtil.getHtmlTitle(content);
-		System.out.println("linke:"+link);
-		if(title.equals("页面不存在")){
+		if(title.equals("\u9875\u9762\u4e0d\u5b58\u5728")){
 			System.out.println("link:"+link);
 			return false;
 		}
