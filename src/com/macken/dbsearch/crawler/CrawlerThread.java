@@ -26,7 +26,7 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-
+			System.out.println("group:"+link);
 			Date date = new Date();
 			String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
@@ -59,6 +59,7 @@ public class CrawlerThread extends Thread {
 						t.dateStr = dateStr;
 						t.titleHash=titleHash;
 						DBUtil.instance.add(t);
+						System.out.println("add link:"+t.link);
 					}
 				}
 			} catch (Exception e) {
