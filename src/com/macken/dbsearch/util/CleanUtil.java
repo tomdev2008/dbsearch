@@ -26,7 +26,7 @@ public class CleanUtil {
 				DBUtil.instance.delete(t);
 			}
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(50000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

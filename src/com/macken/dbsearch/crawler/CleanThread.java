@@ -8,7 +8,7 @@ public class CleanThread extends Thread{
 		while(true){
 			try {
 				CleanUtil.updateScheduleTopic();
-				this.sleep(5 * 60 * 1000);
+				this.sleep(60 * 60 * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -34,6 +34,8 @@ public class DBUtil {
 		return DaoSupport.db.query(sql, Topic.rowMapper);
 	}
 	
+	
+	
 	public List<Topic> getTotalTopic(){
 		String sql = "select * from topic_info order by create_time";
 		return DaoSupport.db.query(sql, Topic.rowMapper);
