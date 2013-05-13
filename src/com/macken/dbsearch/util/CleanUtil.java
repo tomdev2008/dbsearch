@@ -39,6 +39,7 @@ public class CleanUtil {
 			System.out.println("link:"+link);
 			return false;
 		}
+		
 		return true;
 	}
 	
