@@ -1,0 +1,7 @@
+DELETE FROM topic_info WHERE title_hash IN(SELECT title_hash FROM (SELECT COUNT(*) AS c,title_hash FROM topic_info GROUP BY title_hash) AS tmp WHERE c>1);
+
+SELECT COUNT(*) AS c,title_hash FROM topic_info GROUP BY title_hash ORDER BY c DESC
+
+SELECT * FROM topic_info WHERE title_hash IS NULL
+
+SELECT * FROM topic_info ORDER BY create_time DESC LIMIT 0,10;
