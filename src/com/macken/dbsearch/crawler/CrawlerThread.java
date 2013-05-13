@@ -38,7 +38,7 @@ public class CrawlerThread extends Thread {
 					TagNode linkNode = (TagNode) nodes[i];
 					String href = linkNode.getAttributeByName("href");
 					String title = linkNode.getAttributeByName("title");
-
+					String titleHash=HashUtil.getHash(title);
 					String id = HashUtil.getHash(href);
 					int type = 0;
 					
@@ -49,7 +49,7 @@ public class CrawlerThread extends Thread {
 						type = 2;
 					}
 
-					if (type != 0 && !DBUtil.instance.exists(id)) {
+					if (type != 0 && !DBUtil.instance.exists(id) && !DBUtil.instance.existsTitle(titleHash)) {
 						Topic t = new Topic();
 						t.link = href;
 						t.title = title;
@@ -57,6 +57,8 @@ public class CrawlerThread extends Thread {
 						t.id = id;
 						t.type = type;
 						t.dateStr = dateStr;
+						t.titleHash=titleHash;
+						DBUtil.instance.add(t);
 					}
 				}
 			} catch (Exception e) {

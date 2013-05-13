@@ -10,9 +10,10 @@ public class Topic {
 	public int type;
 	public String link;
 	public String title;
+	public String titleHash;
 	public String dateStr;
 	public long createTime;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -44,7 +45,12 @@ public class Topic {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	public String getTitleHash() {
+		return this.titleHash;
+	}
+	public void setTitleHash(String titleHash) {
+		this.titleHash = titleHash;
+	}
 	public String getDateStr() {
 		return dateStr;
 	}
@@ -61,16 +67,16 @@ public class Topic {
 		this.createTime = createTime;
 	}
 
-	public static RowMapper<Topic> rowMapper=new RowMapper<Topic>() {
-		
+	public static RowMapper<Topic> rowMapper = new RowMapper<Topic>() {
+
 		public Topic mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Topic t=new Topic();
-			t.id=rs.getString("id");
-			t.type=rs.getInt("type");
-			t.link=rs.getString("link");
-			t.title=rs.getString("title");
-			t.dateStr=rs.getString("date_str");
-			t.createTime=rs.getLong("create_time");
+			Topic t = new Topic();
+			t.id = rs.getString("id");
+			t.type = rs.getInt("type");
+			t.link = rs.getString("link");
+			t.title = rs.getString("title");
+			t.dateStr = rs.getString("date_str");
+			t.createTime = rs.getLong("create_time");
 			return t;
 		}
 	};
