@@ -18,6 +18,8 @@ public class CrawlerSchedule {
 		// }
 		UploadThread ut=new UploadThread();
 		ut.start();
+		CleanThread cth=new CleanThread();
+		cth.start();
 		while(true){
 			List<Group> groups = DBUtil.instance.getAllGroup();
 			for (Group g : groups) {
