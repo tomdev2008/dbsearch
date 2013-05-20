@@ -7,8 +7,8 @@ cookie = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
 params = {
-"form_email":"403332023@qq.com",
-"form_password":"1989hao",
+"form_email":"email",
+"form_password":"password",
 "source":"index_nav"
 }
 
