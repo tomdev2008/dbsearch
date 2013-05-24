@@ -48,8 +48,20 @@ def loadtitle():
 	lines=file.readlines()
 	file.close()
 	return lines
-
-
+def searchaddgroup(account):
+	start=0;
+	url='http://www.douban.com/group/explore?start='+str(start)+'&tag=%e6%81%8b%e7%88%b1'
+	while start <=100:
+		account.addmoregroup(url)
+		start+=20
+def publictopic():
+	while(true):
+		for a in aList:
+			if a.expiretime<time.time():
+				t,c=randtopic()
+				a.addtopic(t,c)
+		time.sleep(1000)
+	
 accountsdict={'1505014246@qq.com':'72538099:9ujSxqAJjBQ'}
 
 aList=[]
@@ -57,7 +69,9 @@ for k,v in accountsdict.items():
 	aList.append(account.Account(k,v))
 titles=loadtitle()
 contents={'default':'123.txt'}
+#searchaddgroup(aList[0])
 
+publictopic()
 
 
 

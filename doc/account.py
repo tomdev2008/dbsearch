@@ -36,11 +36,13 @@ class Account:
 	def addgroup(self,url):
 		url=url+'?action=join&ck='+self.ck
 		response=self.opener.open(url)
+		print 'add '+url
 		time.sleep(1)
 		
 	def removegroup(self,url):
 		url=url+'?action=quit&ck='+self.ck
 		response=self.opener.open(url)
+		print 'remove '+url
 		time.sleep(1)
 	
 	def removeallgroup():
@@ -72,17 +74,17 @@ class Account:
 			del self.groups[0]
 			return true
 
-	def searchgroup(self,start):
-		url='http://www.douban.com/group/explore?start='+start+'&tag=%e6%81%8b%e7%88%b1'
-		print url
+	def addmoregroup(self,url):
+#		url='http://www.douban.com/group/explore?start='+start+'&tag=%e6%81%8b%e7%88%b1'
 		response=self.opener.open(url)
 		html=response.read()
 		root=etree.HTML(html)
 		nodes=root.xpath('//*[@id="content"]/div/div[1]/div[1]/div/div/div/h3/a')
 		res=[]
 		for node in nodes:
-			res.append(node.get("href"))
-		return res
+			self.addgroup(node.get("href"))
+#			res.append(node.get("href"))
+
 if __name__ == '__main__':
 	account=Account('72538099:9ujSxqAJjBQ');
 	print account.groups
