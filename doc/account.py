@@ -67,6 +67,7 @@ class Account:
 		request.add_header("Origin", "http://www.douban.com")
 		request.add_header("Referer", group)
 		response=self.opener.open(request,urllib.urlencode(p))
+		print time.ctime()+" "+self.email+" "+url
 		self.expiretime=time.time()+15*60
 		del self.groups[0]
 #		if response.getcode()==200:
