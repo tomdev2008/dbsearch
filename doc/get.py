@@ -1,13 +1,10 @@
 # -- coding:gbk --
 import sys, time, os, re
-import urllib, urllib2, cookielib
+import urllib, urllib2, cookielib,Cookie
 
 url="http://www.douban.com"
 
-cookie=cookielib.LWPCookieJar("cookiedata")
-opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+c=Cookie.SimpleCookie(os.environ["HTTP-COOKIE"]);
+c["ck"]="VOAV";
+c["dbcl2"]="63136861:k2Qoj9YBn28";
 
-response=opener.open(url)
-
-for c in list(cookie):
-    print c.value
