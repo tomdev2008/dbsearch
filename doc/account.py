@@ -67,13 +67,15 @@ class Account:
 		request.add_header("Origin", "http://www.douban.com")
 		request.add_header("Referer", group)
 		response=self.opener.open(request,urllib.urlencode(p))
-		if response.getcode()==200:
-			self.expiretime=time.time()+20*3600
-			print self.email+' fail'
-		else:
-			self.expiretime=time.time()+10*3600
-			print self.email + 'success'
-			del self.groups[0]
+		self.expiretime=time.time()+15*60
+		del self.groups[0]
+#		if response.getcode()==200:
+#			self.expiretime=time.time()+20*3600
+#			print self.email+' fail'
+#		else:
+#			self.expiretime=time.time()+10*3600
+#			print self.email + 'success'
+#			del self.groups[0]
 
 	def addmoregroup(self,url):
 #		url='http://www.douban.com/group/explore?start='+start+'&tag=%e6%81%8b%e7%88%b1'
