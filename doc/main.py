@@ -54,9 +54,9 @@ accountsdict={
 			'dengtengfei5000@sina.cn':'72944622:hPQTV3+54OA'}
 #'1505014246@qq.com':'72538099:9ujSxqAJjBQ',
 
-#aList=[]
-#for k,v in accountsdict.items():
-#	aList.append(account.Account(k,v))
+aList=[]
+for k,v in accountsdict.items():
+	aList.append(account.Account(k,v))
 titles=loadtitle()
 contents={'default':'123.txt',
 		'1234':'1234.txt'}
