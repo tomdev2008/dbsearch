@@ -47,7 +47,7 @@ def publictopic():
 			if a.expiretime<time.time():
 				t,c=randtopic()
 				a.addtopic(t,c)
-		time.sleep(1000)
+		time.sleep(60*10)
 	
 accountsdict={
 			'liye19871989@sina.cn':'72944347:/fb+z+stnbI',
@@ -66,8 +66,8 @@ contents={'default':'123.txt',
 #for a in aList:
 #	searchaddgroup(a)
 
-#publictopic()
-print randtopic()
+publictopic()
+#print randtopic()
 
 
 
