@@ -36,7 +36,7 @@ class Account:
 	def addgroup(self,url):
 		url=url+'?action=join&ck='+self.ck
 		response=self.opener.open(url)
-		print 'add '+url
+		print 'mail:'+self.email+' add '+url
 		time.sleep(1)
 		
 	def removegroup(self,url):
@@ -56,7 +56,7 @@ class Account:
 		group=self.groups[0]
 		url=group+"new_topic"
 		p={}
-		p["ck"]=ck
+		p["ck"]=self.ck
 		p["rev_title"]=title
 		p["rev_text"]=content
 		p["rev_submit"]="r"
@@ -68,11 +68,12 @@ class Account:
 		request.add_header("Referer", group)
 		response=self.opener.open(request,urllib.urlencode(p))
 		if response.getcode()==200:
-			self.expiretime=time.time()+10*2600
-			return false
+			self.expiretime=time.time()+20*3600
+			print self.email+' fail'
 		else:
+			self.expiretime=time.time()+10*3600
+			print self.email + 'success'
 			del self.groups[0]
-			return true
 
 	def addmoregroup(self,url):
 #		url='http://www.douban.com/group/explore?start='+start+'&tag=%e6%81%8b%e7%88%b1'

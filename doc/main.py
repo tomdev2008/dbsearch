@@ -8,19 +8,6 @@ import urllib
 import account
 
 
-#def searchgroup(start):
-#	url='http://www.douban.com/group/explore?start='+start+'&tag=%e6%81%8b%e7%88%b1'
-#	print url
-#	response=opener.open(url)
-#	html=response.read()
-#	root=etree.HTML(html)
-#	nodes=root.xpath('//*[@id="content"]/div/div[1]/div[1]/div/div/div/h3/a')
-#	res=[]
-#	for node in nodes:
-#		res.append(node.get("href"))
-#	return res
-
-
 def randtopic():
 	t=randomlist(titles)
 	key=randomitem(contents)
@@ -50,28 +37,37 @@ def loadtitle():
 	return lines
 def searchaddgroup(account):
 	start=0;
-	url='http://www.douban.com/group/explore?start='+str(start)+'&tag=%e6%81%8b%e7%88%b1'
 	while start <=100:
+		url='http://www.douban.com/group/explore?start='+str(start)+'&tag=%e6%81%8b%e7%88%b1'
 		account.addmoregroup(url)
 		start+=20
 def publictopic():
-	while(true):
+	while True:
 		for a in aList:
 			if a.expiretime<time.time():
 				t,c=randtopic()
 				a.addtopic(t,c)
 		time.sleep(1000)
 	
-accountsdict={'1505014246@qq.com':'72538099:9ujSxqAJjBQ'}
+accountsdict={
+			'liye19871989@sina.cn':'72944347:/fb+z+stnbI',
+			'dengtengfei5000@sina.cn':'72944622:hPQTV3+54OA'}
+#'1505014246@qq.com':'72538099:9ujSxqAJjBQ',
 
-aList=[]
-for k,v in accountsdict.items():
-	aList.append(account.Account(k,v))
+#aList=[]
+#for k,v in accountsdict.items():
+#	aList.append(account.Account(k,v))
 titles=loadtitle()
-contents={'default':'123.txt'}
-#searchaddgroup(aList[0])
+contents={'default':'123.txt',
+		'1234':'1234.txt'}
+#searchaddgroup(aList[1])
+#searchaddgroup(aList[2])
 
-publictopic()
+#for a in aList:
+#	searchaddgroup(a)
+
+#publictopic()
+print randtopic()
 
 
 
