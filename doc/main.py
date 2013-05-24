@@ -21,7 +21,6 @@ import account
 #	return res
 
 
-
 def randtopic():
 	t=randomlist(titles)
 	key=randomitem(contents)

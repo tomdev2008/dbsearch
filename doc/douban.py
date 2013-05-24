@@ -1,11 +1,13 @@
 # -- coding:gbk --
 import sys, time, os, re
 import urllib, urllib2, cookielib
+import cookieParser
 
 loginurl = 'https://www.douban.com/accounts/login'
 #cookie = cookielib.CookieJar()
-cookie = cookielib.MozillaCookieJar("cookiedata");
+cookie = cookielib.LWPCookieJar("cookiedata");
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+urllib2.install_opener(opener);
 
 params = {
 "form_email":"403332023@qq.com",
@@ -13,8 +15,8 @@ params = {
 "source":"index_nav"
 }
 
-response=opener.open(loginurl, urllib.urlencode(params))
-
+response=urllib2.urlopen(loginurl, urllib.urlencode(params))
+print response.headers["set-cookie"]
 print response.geturl()
 
 if response.geturl() == "https://www.douban.com/accounts/login":
@@ -30,19 +32,24 @@ if response.geturl() == "https://www.douban.com/accounts/login":
 			params["captcha-solution"] = vcode
 			params["captcha-id"] = captcha.group(1)
 			params["user_login"] = "login"
-			response=opener.open(loginurl, urllib.urlencode(params))
+			response=urllib2.urlopen(loginurl, urllib.urlencode(params))
+			cookie.save();
+			print response.headers["set-cookie"]
 			''' redirect index '''
 			if response.geturl() == "http://www.douban.com/":
-				cookie.save("cookiedata")
+#				cookie.save();
 				print 'login success ! '
 				print 'reday to public'
 				p={"ck":""}
+				for cn in list(cookie):
+					print cn.value+":"+cn.name
 				c = [c.value for c in list(cookie) if c.name == 'ck']				
 				if len(c) > 0:
 					p["ck"] = c[0].strip('"')		
 				
 				addtopicurl="http://www.douban.com/group/bj/new_topic"
 				res=opener.open(addtopicurl)
+				print res.headers["set-cookie"]
 				html=res.read()
 				
 				'''m= re.search('<input type="hidden" name="topic_id" value="(.+?)">', html)	
