@@ -60,12 +60,12 @@ contents={'default':'123.txt',
 		'1234':'1234.txt'}
 #aList[0].removeallgroup()
 #searchaddgroup(aList[1])
-searchaddgroup(aList[0])
+#searchaddgroup(aList[0])
 
 #for a in aList:
 #	searchaddgroup(a)
 
-#publictopic()
+publictopic()
 #print randtopic()
 
 
