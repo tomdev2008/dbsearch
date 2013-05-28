@@ -18,6 +18,7 @@ def updategroupname(gurl):
 #	print etree.tostring(title[0].text)
 	clean_title=title[0].text.replace('\n','').replace('ะกื้','').replace(' ','')
 	sql="update group_info set `name`='"+clean_title+"' where link='"+gurl+"'"
+
 	try:
 		cur.execute(sql)
 	except:
