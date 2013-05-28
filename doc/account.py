@@ -45,10 +45,10 @@ class Account:
 		print 'remove '+url
 		time.sleep(1)
 	
-	def removeallgroup():
-		list=self.getmygroup()
-		for l in list:
-			self.removegroup(l,ck)		
+	def removeallgroup(self):
+		groups=self.groups
+		for l in groups:
+			self.removegroup(l)		
 	
 	def addtopic(self,title,content):
 		if len(self.groups) <=0 :
