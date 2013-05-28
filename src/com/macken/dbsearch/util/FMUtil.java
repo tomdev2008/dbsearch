@@ -29,18 +29,19 @@ public class FMUtil {
 	}
 
 	public static void gen() throws IOException {
-		List<Topic> topics = DBUtil.instance.getAllTopic();
+		int number=150;
+		List<Topic> topics = DBUtil.instance.getAllTopic(number);
 		ModelMap map = new ModelMap();
 		map.put("substr", new SubStr());
 		map.put("dateformat", new DateMethod());
 		map.put("topics", topics);
 		genHtml(map, "index.tpl", "index.html");
 
-		topics = DBUtil.instance.getManTopic();
+		topics = DBUtil.instance.getManTopic(number);
 		map.put("topics", topics);
 		genHtml(map, "man.tpl", "man.html");
 
-		topics = DBUtil.instance.getWomenTopic();
+		topics = DBUtil.instance.getWomenTopic(number);
 		map.put("topics", topics);
 		genHtml(map, "women.tpl", "women.html");
 	}
