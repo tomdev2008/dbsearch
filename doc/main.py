@@ -24,6 +24,7 @@ def randomitem(tmplist):
 	for a,v in tmplist.items():
 		if i==ran:
 			return a
+		i+=1
 	return 'default'
 def randomlist(tmplist):
 	length=len(tmplist)
@@ -65,7 +66,9 @@ contents={'default':'123.txt',
 #for a in aList:
 #	searchaddgroup(a)
 
-publictopic()
+#publictopic()
+#print randtopic()
+
 #print randtopic()
 
 
