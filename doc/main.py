@@ -38,7 +38,7 @@ def loadtitle():
 def searchaddgroup(account):
 	start=0;
 	while start <=100:
-		url='http://www.douban.com/group/explore?start='+str(start)+'&tag=%e6%81%8b%e7%88%b1'
+		url='http://www.douban.com/group/explore?start='+str(start)+'&tag=%e6%98%9f%e5%ba%a7'
 		account.addmoregroup(url)
 		start+=20
 def publictopic():
@@ -49,9 +49,7 @@ def publictopic():
 				a.addtopic(t,c)
 		time.sleep(60*10)
 	
-accountsdict={
-			'liye19871989@sina.cn':'72944347:/fb+z+stnbI',
-			'dengtengfei5000@sina.cn':'72944622:hPQTV3+54OA'}
+accountsdict={'jokerdu@126.com':"73054480:Xu/RthOBGLc"}
 #'1505014246@qq.com':'72538099:9ujSxqAJjBQ',
 
 aList=[]
@@ -60,13 +58,14 @@ for k,v in accountsdict.items():
 titles=loadtitle()
 contents={'default':'123.txt',
 		'1234':'1234.txt'}
+#aList[0].removeallgroup()
 #searchaddgroup(aList[1])
-#searchaddgroup(aList[2])
+searchaddgroup(aList[0])
 
 #for a in aList:
 #	searchaddgroup(a)
 
-publictopic()
+#publictopic()
 #print randtopic()
 
 
