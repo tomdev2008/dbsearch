@@ -58,7 +58,9 @@ for k,v in accountsdict.items():
 	aList.append(account.Account(k,v))
 titles=loadtitle()
 contents={'default':'123.txt',
-		'1234':'1234.txt'}
+		'1234':'1234.txt',
+		'c1':'content/c1.txt',
+		'c2':'content/c2.txt'}
 #aList[0].removeallgroup()
 #searchaddgroup(aList[1])
 #searchaddgroup(aList[0])
@@ -66,9 +68,7 @@ contents={'default':'123.txt',
 #for a in aList:
 #	searchaddgroup(a)
 
-#publictopic()
-#print randtopic()
-
+publictopic()
 #print randtopic()
 
 
