@@ -84,14 +84,42 @@ class Account:
 		html=response.read()
 		root=etree.HTML(html)
 		nodes=root.xpath('//*[@id="content"]/div/div[1]/div[1]/div/div/div/h3/a')
-		res=[]
+#		print len(nodes)
 		for node in nodes:
 			self.addgroup(node.get("href"))
 #			res.append(node.get("href"))
-
+	def addsearchgroup(self,url):
+		print url
+		response=self.opener.open(url)
+		html=response.read()
+		root=etree.HTML(html)
+#		nodes=root.xpath('//*[@id="content"]/div/div[@class="article"]/div[@class="groups"]/div')
+		nodes=root.xpath('//*[@class="result"]/div[@class="content"]')
+#		//*[@id="content"]/div/div[1]/div[2]/div[4]/div[2]/div[1]/h3/a
+		print len(nodes)
+		for node in nodes:
+			s=etree.HTML(etree.tostring(node))
+#			m=s.xpath('//a')
+#			print s[0].get('href')
+			
+#			print etree.tostring(node)
+			href=s.xpath('//*[@class="title"]/h3/a')[0].get('href')
+			count=self.getcount(s.xpath('//div[@class="info"]')[0].text)
+			if count > 5000 :
+				self.addgroup(href)
+#			print ns.get("href")
+	def getcount(self,str):
+		index=str.find(' ')
+		return str[0:index]
 if __name__ == '__main__':
-	account=Account('72538099:9ujSxqAJjBQ');
-	print account.groups
+#	account=Account('72538099:9ujSxqAJjBQ');
+#	print account.groups
+	title='32103 个成员 在此聚集'
+	
+	index=title.find(' ')
+	print index
+	num=title[0:index]
+	print num
 
 
 #def addmoregroup():
