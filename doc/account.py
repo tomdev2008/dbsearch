@@ -5,6 +5,7 @@ from lxml import etree
 import re,time
 import random
 import urllib
+import string
 
 class Account:
 	def __init__(self,email,dbcl2):
@@ -96,7 +97,6 @@ class Account:
 #		nodes=root.xpath('//*[@id="content"]/div/div[@class="article"]/div[@class="groups"]/div')
 		nodes=root.xpath('//*[@class="result"]/div[@class="content"]')
 #		//*[@id="content"]/div/div[1]/div[2]/div[4]/div[2]/div[1]/h3/a
-		print len(nodes)
 		for node in nodes:
 			s=etree.HTML(etree.tostring(node))
 #			m=s.xpath('//a')
@@ -105,8 +105,9 @@ class Account:
 #			print etree.tostring(node)
 			href=s.xpath('//*[@class="title"]/h3/a')[0].get('href')
 			count=self.getcount(s.xpath('//div[@class="info"]')[0].text)
-			if count > 5000 :
+			if string.atoi(count) > 5000 :
 				self.addgroup(href)
+				print count
 #			print ns.get("href")
 	def getcount(self,str):
 		index=str.find(' ')
@@ -119,7 +120,8 @@ if __name__ == '__main__':
 	index=title.find(' ')
 	print index
 	num=title[0:index]
-	print num
+	if string.atoi(num) > 232103:
+		print num
 
 
 #def addmoregroup():
