@@ -17,6 +17,9 @@ public class Topic {
 	public String dateStr;
 	public long createTime;
 	public String createTimeStr;
+	public long topicTime;
+	public String userId;
+	public String userName;
 
 	public String getId() {
 		return id;
@@ -74,6 +77,38 @@ public class Topic {
 	public String getCreateTimeStr(){
 		return DateUtil.format(new Date(createTime), "yyyy-MM-dd HH:mm");
 	}
+	
+	
+
+	public long getTopicTime() {
+		return topicTime;
+	}
+
+	public void setTopicTime(long topicTime) {
+		this.topicTime = topicTime;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+
 
 	public static RowMapper<Topic> rowMapper = new RowMapper<Topic>() {
 
@@ -85,6 +120,9 @@ public class Topic {
 			t.title = rs.getString("title");
 			t.dateStr = rs.getString("date_str");
 			t.createTime = rs.getLong("create_time");
+			t.topicTime=rs.getLong("topic_time");
+			t.userId=rs.getString("user_id");
+			t.userName=rs.getString("user_name");
 			return t;
 		}
 	};
