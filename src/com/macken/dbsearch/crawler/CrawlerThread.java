@@ -31,15 +31,16 @@ public class CrawlerThread extends Thread {
 		
 		Date date = new Date();
 		String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
+		if (!isGoOn(g)) {
+			System.out.println("time is not reach");
+			return;
+		}
 
 		String content = HttpUtil.getHtmlContent(link, "utf-8");
 		if (content == null) {
 			return;
 		}
-		if (!isGoOn(g)) {
-			System.out.println("time is not reach");
-			return;
-		}
+		
 		System.out.println("group:" + link);
 		//			System.out.println(content);
 		TagNode root = HttpUtil.getCleanTagNode(content);
