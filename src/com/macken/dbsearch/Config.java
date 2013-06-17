@@ -3,7 +3,8 @@ package com.macken.dbsearch;
 public class Config {
 	public static final String TOPICSET = "topicset";
 	public static final String LINKPRE="link_";
-	public static final String TABLEXPATH="//table[@class='olt']/tbody/tr/td[1]/a[1]";
+//	public static final String TABLEXPATH="//table[@class='olt']/tbody/tr/td[1]/a[1]";
+	public static final String TABLEXPATH="//table[@class='olt']/tbody/tr";
 	public static final String MLISTKEY="mdateset";
 	public static final String MLISTPRE="mdate_";
 	
