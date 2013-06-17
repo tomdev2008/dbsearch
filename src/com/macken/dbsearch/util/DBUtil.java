@@ -84,9 +84,20 @@ public class DBUtil {
 		return null;
 	}
 	public boolean addUser(User user) {
+		if (isExist(user)) {
+			return false;
+		}
 		String sql = "insert into user_info(user_id,user_name)values(:userId,:userName)";
 		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(user));
 		return res > 0;
+	}
+	public boolean isExist(User user) {
+		String sql = "select * from user_info where user_id=?";
+		List<User> users = DaoSupport.db.query(sql, User.rowMapper, user.userId);
+		if (users.size() > 0) {
+			return true;
+		}
+		return false;
 	}
 	public boolean updateGroup(Group g) {
 		String sql = "update group_info set last_crawler=:lastCrawler,crawler_interval=:crawlerInterval,interval_hour=:intervalHour where link=:link";
