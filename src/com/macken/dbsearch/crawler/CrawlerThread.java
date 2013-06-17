@@ -28,7 +28,7 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("group:" + link);
+		
 		Date date = new Date();
 		String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
@@ -40,6 +40,7 @@ public class CrawlerThread extends Thread {
 			System.out.println("time is not reach");
 			return;
 		}
+		System.out.println("group:" + link);
 		//			System.out.println(content);
 		TagNode root = HttpUtil.getCleanTagNode(content);
 		try {
