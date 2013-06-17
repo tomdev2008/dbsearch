@@ -16,8 +16,8 @@ public class TestDB {
 //		List<Group> groups = DBUtil.instance.getAllGroup();
 //		Group g=groups.get(2);
 //		System.out.println(g.link);
-		String link="http://www.douban.com/group/kaopulove";
-		CrawlerThread ct=new CrawlerThread(link);
-		ct.start();
+//		String link="http://www.douban.com/group/kaopulove";
+//		CrawlerThread ct=new CrawlerThread(link);
+//		ct.start();
 	}
 }
