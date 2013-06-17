@@ -6,22 +6,23 @@ import org.htmlcleaner.TagNode;
 
 import com.google.gson.Gson;
 import com.macken.dbsearch.Config;
+import com.macken.dbsearch.entity.Group;
 import com.macken.dbsearch.entity.Topic;
 import com.macken.dbsearch.entity.User;
 import com.macken.dbsearch.util.CheckUtil;
 import com.macken.dbsearch.util.DBUtil;
 import com.macken.dbsearch.util.DateUtil;
-import com.macken.dbsearch.util.ExtractUtil;
 import com.macken.dbsearch.util.HashUtil;
 import com.macken.dbsearch.util.HttpUtil;
-import com.macken.dbsearch.util.RedisUtil;
 
 public class CrawlerThread extends Thread {
 	private String link;
 	private Gson gson;
+	private Group g;
 
-	public CrawlerThread(String link) {
-		this.link = link;
+	public CrawlerThread(Group g) {
+		this.link = g.link;
+		this.g = g;
 		gson = new Gson();
 	}
 
@@ -32,11 +33,17 @@ public class CrawlerThread extends Thread {
 		String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 
 		String content = HttpUtil.getHtmlContent(link, "utf-8");
+		if (content == null) {
+			return;
+		}
+		if (!isGoOn(g)) {
+			System.out.println("time is not reach");
+			return;
+		}
 		//			System.out.println(content);
 		TagNode root = HttpUtil.getCleanTagNode(content);
 		try {
 			Object[] nodes = root.evaluateXPath(Config.TABLEXPATH);
-			System.out.println(nodes.length);
 			for (int i = 0; i < nodes.length; i++) {
 				Topic t = new Topic();
 				t.type = 0;
@@ -75,11 +82,13 @@ public class CrawlerThread extends Thread {
 					User user = new User();
 					user.userId = t.userId;
 					user.userName = t.userName;
-					System.out.println(t.link+"\t"+t.userName+"\t"+t.userId);
+					System.out.println(t.link + "\t" + t.userName + "\t" + t.userId);
 					DBUtil.instance.addUser(user);
 				}
 
 			}
+			g.lastCrawler = System.currentTimeMillis();
+			DBUtil.instance.updateGroup(g);
 			//				for (int i = 0; i < nodes.length; i++) {
 			//					TagNode linkNode = (TagNode) nodes[i];
 			//					String href = linkNode.getAttributeByName("href");
@@ -115,9 +124,22 @@ public class CrawlerThread extends Thread {
 		String[] arr = link.trim().split("/");
 		return arr[arr.length - 1];
 	}
+	public boolean isGoOn(Group g) {
+		long low = 10 * 1000;
+		long day = 12 * 3600 * 1000;
+		long interval = g.crawlerInterval / 2 < low ? low : g.crawlerInterval;
+		interval = interval > day ? day : interval;
+		long time = g.lastCrawler + interval;
+
+		if (time < System.currentTimeMillis()) {
+			return true;
+		}
+
+		return false;
+	}
 	public static void main(String[] args) {
 		String link = "http://www.douban.com/group/topic/40409903/";
-		CrawlerThread ct = new CrawlerThread("");
-		ct.getUserId(link);
+		//		CrawlerThread ct = new CrawlerThread("");
+		//		ct.getUserId(link);
 	}
 }

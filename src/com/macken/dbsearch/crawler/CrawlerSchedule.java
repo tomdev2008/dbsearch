@@ -10,7 +10,7 @@ public class CrawlerSchedule {
 
 		List<Group> groups = DBUtil.instance.getAllGroup();
 		for (Group g : groups) {
-			CrawlerThread ct = new CrawlerThread(g.link);
+			CrawlerThread ct = new CrawlerThread(g);
 			ct.start();
 		}
 
