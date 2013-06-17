@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 
 import com.macken.dbsearch.entity.Group;
 import com.macken.dbsearch.entity.Topic;
+import com.macken.dbsearch.entity.User;
 
 public class DBUtil {
 	public static DBUtil instance = new DBUtil();
@@ -62,7 +63,7 @@ public class DBUtil {
 		return DaoSupport.db.query(sql, Topic.rowMapper);
 	}
 	public boolean add(Topic t) {
-		String sql = "insert into topic_info(id,type,link,title,title_hash,create_time,date_str) values(:id,:type,:link,:title,:titleHash,:createTime,:dateStr)";
+		String sql = "insert into topic_info(id,type,link,title,title_hash,create_time,date_str,user_id,user_name) values(:id,:type,:link,:title,:titleHash,:createTime,:dateStr,:userId,:userName)";
 		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(t));
 		return res > 0;
 	}
@@ -81,5 +82,10 @@ public class DBUtil {
 			return res.get(0).split(",");
 		}
 		return null;
+	}
+	public boolean addUser(User user){
+		String sql="insert into user_info(user_id,user_name)values(:userId,:userName)";
+		int res=DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(user));
+		return res>0;
 	}
 }
