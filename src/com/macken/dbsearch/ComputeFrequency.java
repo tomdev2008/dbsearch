@@ -14,13 +14,13 @@ import com.macken.dbsearch.util.HttpUtil;
 public class ComputeFrequency {
 	public static void main(String[] args) throws Exception {
 		List<Group> groups = DBUtil.instance.getAllGroup();
-						Group g=groups.get(0);
-						System.out.println(g.link);
-						compute(g);
-//		for (Group g : groups) {
-//			compute(g);
-//			Thread.sleep(2000);
-//		}
+		//						Group g=groups.get(0);
+		//						System.out.println(g.link);
+		//						compute(g);
+		for (Group g : groups) {
+			compute(g);
+			Thread.sleep(2000);
+		}
 		//		String text = "2013-01-01";
 		//		System.out.println(convertTime(text).toString());
 	}
