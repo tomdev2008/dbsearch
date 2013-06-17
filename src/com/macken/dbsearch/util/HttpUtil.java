@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -35,7 +36,10 @@ public class HttpUtil {
 		try {
 			HttpResponse response = client.execute(httpget);
 			HttpEntity entity = response.getEntity();
-
+			if(response.getStatusLine().getStatusCode()==HttpStatus.SC_FORBIDDEN){
+				httpget.abort();
+				return null;
+			}
 			if (entity != null) {
 				StringBuffer sb = new StringBuffer();
 				InputStream is = entity.getContent();
