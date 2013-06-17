@@ -83,9 +83,14 @@ public class DBUtil {
 		}
 		return null;
 	}
-	public boolean addUser(User user){
-		String sql="insert into user_info(user_id,user_name)values(:userId,:userName)";
-		int res=DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(user));
-		return res>0;
+	public boolean addUser(User user) {
+		String sql = "insert into user_info(user_id,user_name)values(:userId,:userName)";
+		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(user));
+		return res > 0;
+	}
+	public boolean updateGroup(Group g) {
+		String sql = "update group_info set last_crawler=:lastCrawler,crawler_interval=:crawlerInterval,interval_hour=:intervalHour where link=:link";
+		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(g));
+		return res > 0;
 	}
 }
