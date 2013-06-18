@@ -2,8 +2,9 @@ package com.macken.dbsearch;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -27,11 +28,12 @@ public class OutputJson {
 		if (f.exists()) {
 			f.mkdirs();
 		}
-		FileWriter write = new FileWriter(new File(oPath));
-		BufferedWriter out = new BufferedWriter(write);
+//		FileWriter write = new FileWriter(new File(oPath));
+		OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(oPath),"UTF-8");
+//		BufferedWriter out = new BufferedWriter(write);
 		out.write(gson.toJson(topic));
 		out.close();
-		write.close();
+//		write.close();
 	}
 
 }
