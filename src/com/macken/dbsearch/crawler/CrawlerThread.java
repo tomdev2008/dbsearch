@@ -28,7 +28,7 @@ public class CrawlerThread extends Thread {
 
 	@Override
 	public void run() {
-		
+
 		Date date = new Date();
 		String dateStr = DateUtil.format(date, DateUtil.DATE_FMT_3);
 		if (!isGoOn(g)) {
@@ -40,7 +40,7 @@ public class CrawlerThread extends Thread {
 		if (content == null) {
 			return;
 		}
-		
+
 		System.out.println("group:" + link);
 		//			System.out.println(content);
 		TagNode root = HttpUtil.getCleanTagNode(content);
@@ -80,6 +80,7 @@ public class CrawlerThread extends Thread {
 					t.createTime = System.currentTimeMillis();
 					t.dateStr = dateStr;
 					t.titleHash = titleHash;
+					t.id = id;
 					DBUtil.instance.add(t);
 					User user = new User();
 					user.userId = t.userId;
