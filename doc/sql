@@ -5,3 +5,5 @@ SELECT COUNT(*) AS c,title_hash FROM topic_info GROUP BY title_hash ORDER BY c D
 SELECT * FROM topic_info WHERE title_hash IS NULL
 
 SELECT * FROM topic_info ORDER BY create_time DESC LIMIT 0,10;
+
+DELETE FROM topic_info WHERE id IN (SELECT id FROM (SELECT COUNT(*) AS c,id FROM topic_info GROUP BY id) AS tmp WHERE c>1)

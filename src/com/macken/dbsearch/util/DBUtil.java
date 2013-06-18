@@ -104,4 +104,15 @@ public class DBUtil {
 		int res = DaoSupport.db.update(sql, new BeanPropertySqlParameterSource(g));
 		return res > 0;
 	}
+	public boolean updateTopicId(Topic t) {
+		String sql = "update topic_info set id=? where link=?";
+		int res = DaoSupport.db.update(sql, t.id, t.link);
+		return res > 0;
+	}
+	public List<Topic> getNoIdTopics() {
+		String sql = "select * from topic_info where id is null";
+		List<Topic> list = DaoSupport.db.query(sql, Topic.rowMapper);
+		return list;
+	}
+
 }
