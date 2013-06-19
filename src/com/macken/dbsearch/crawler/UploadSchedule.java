@@ -11,7 +11,7 @@ public class UploadSchedule {
 	public static void main(String[] args) {
 		try {
 			FMUtil.gen();
-			OutputJson.genJson();
+			OutputJson.genJson();			
 			FMUtil.exec("scp -r /search/dbsearch/html/ root@173.231.52.194:/search/");
 		} catch (Exception e) {
 			e.printStackTrace();
