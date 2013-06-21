@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.htmlcleaner.TagNode;
 
+import com.macken.dbsearch.OutputJson;
 import com.macken.dbsearch.entity.Topic;
 import com.macken.dbsearch.util.DBUtil;
 import com.macken.dbsearch.util.ExtractUtil;
@@ -17,8 +18,7 @@ public class CleanSchedule {
 	 */
 	public static void main(String[] args) {
 		//		CleanUtil.updateScheduleTopic();
-//		cleanTopic();
-//		testReplace();
+		cleanTopic();
 	}
 	public static void cleanTopic() {
 		Topic topic = DBUtil.instance.getNoContentTopic();
@@ -42,6 +42,7 @@ public class CleanSchedule {
 							topic.topicContent = topicContent;
 							topic.originContent = originContent;
 							DBUtil.instance.updateTopicContent(topic);
+							OutputJson.genTopicJson(topic);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
