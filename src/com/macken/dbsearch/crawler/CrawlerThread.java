@@ -87,38 +87,14 @@ public class CrawlerThread extends Thread {
 					user.userName = t.userName;
 					System.out.println(t.link + "\t" + t.userName + "\t" + t.userId);
 					DBUtil.instance.addUser(user);
+					Thread.sleep(10*1000);
+					CleanSchedule.cleanTopic(t);
 				}
 
 			}
 			g.lastCrawler = System.currentTimeMillis();
 			DBUtil.instance.updateGroup(g);
-			//				for (int i = 0; i < nodes.length; i++) {
-			//					TagNode linkNode = (TagNode) nodes[i];
-			//					String href = linkNode.getAttributeByName("href");
-			//					String title = linkNode.getAttributeByName("title");
-			//					String titleHash=HashUtil.getHash(title);
-			//					String id = HashUtil.getHash(href);
-			//					int type = 0;
-			//					
-			//					if (CheckUtil.checkWords(title)) {
-			//						type = 1;
-			//					} else if (CheckUtil.checkWomenWords(title)) {
-			//						type = 2;
-			//					}
-			//
-			//					if (type != 0 && !DBUtil.instance.exists(id) && !DBUtil.instance.existsTitle(titleHash)) {
-			//						Topic t = new Topic();
-			//						t.link = href;
-			//						t.title = title;
-			//						t.createTime = System.currentTimeMillis();
-			//						t.id = id;
-			//						t.type = type;
-			//						t.dateStr = dateStr;
-			//						t.titleHash=titleHash;
-			////						DBUtil.instance.add(t);
-			//						System.out.println("add link:"+t.link);
-			//					}
-			//				}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

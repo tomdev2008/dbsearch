@@ -20,10 +20,7 @@ public class CleanSchedule {
 		//		CleanUtil.updateScheduleTopic();
 		cleanTopic();
 	}
-	public static void cleanTopic() {
-		Topic topic = DBUtil.instance.getNoContentTopic();
-//		topic.link = "http://www.douban.com/group/topic/40587050/";
-		System.out.println(topic.id);
+	public static void cleanTopic(Topic topic){
 		if (topic != null) {
 			String content = HttpUtil.getHtmlContent(topic.link, "utf-8");
 			if (content != null) {
@@ -42,7 +39,7 @@ public class CleanSchedule {
 							topic.topicContent = topicContent;
 							topic.originContent = originContent;
 							DBUtil.instance.updateTopicContent(topic);
-//							OutputJson.genTopicJson(topic);
+							OutputJson.genTopicJson(topic);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -52,9 +49,11 @@ public class CleanSchedule {
 			} else {
 				return;
 			}
-		} else {
-			return;
 		}
+	}
+	public static void cleanTopic() {
+		Topic topic = DBUtil.instance.getNoContentTopic();
+		cleanTopic(topic);
 	}
 	public static void checkAvaiable(String content) {
 
