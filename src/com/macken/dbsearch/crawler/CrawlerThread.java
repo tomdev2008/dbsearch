@@ -56,11 +56,7 @@ public class CrawlerThread extends Thread {
 					TagNode linkNode = (TagNode) sns[0];
 					t.link = linkNode.getAttributeByName("href");
 					t.title = linkNode.getAttributeByName("title");
-					if (CheckUtil.checkWords(t.title)) {
-						t.type = 1;
-					} else if (CheckUtil.checkWomenWords(t.title)) {
-						t.type = 2;
-					}
+					t.type=CheckUtil.checkTitle(t.title);
 
 				} else {
 					continue;
