@@ -37,6 +37,7 @@ public class OutputJson {
 		genAllJson();
 		genManJson();
 		genWomanJson();
+		genTopics();
 	}
 	public static void genAllJson() throws Exception {
 		List<Topic> all = DBUtil.instance.getAllTopic(NUM);
