@@ -42,9 +42,10 @@ public class OutputJson {
 		List<Topic> woman = DBUtil.instance.getWomenTopic(NUM);
 		genListJson("woman.json", woman);
 	}
-	public static void genListJson(String path,Object object) throws Exception {
+	public static void genListJson(String path,List<Topic> object) throws Exception {
 		path=oPath+path;
-		genJson(path,object);
+		
+		genJson(path,convertToJsonObject(object));
 		
 	}
 	public static void genJson(String path, Object object) throws Exception {
@@ -66,6 +67,7 @@ public class OutputJson {
 		genJson(path, t);
 	}
 	static class ListTopic {
+		String id;
 		String title;
 		String link;
 		String userName;
@@ -76,10 +78,11 @@ public class OutputJson {
 		String link;
 		String content;
 	}
-	public List<ListTopic> convertToJsonObject(List<Topic> topic) {
+	public static List<ListTopic> convertToJsonObject(List<Topic> topic) {
 		List<ListTopic> res = new ArrayList<ListTopic>();
 		for (Topic t : topic) {
 			ListTopic lt = new ListTopic();
+			lt.id=t.id;
 			lt.title = t.title;
 			lt.link = t.link;
 			lt.userName = t.userName;
@@ -88,7 +91,7 @@ public class OutputJson {
 		}
 		return res;
 	}
-	public TopicJson convertToJsonTopic(Topic t) {
+	public static TopicJson convertToJsonTopic(Topic t) {
 		TopicJson tj = new TopicJson();
 		tj.title = t.title;
 		tj.link = t.link;
