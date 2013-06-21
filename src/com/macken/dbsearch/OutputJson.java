@@ -21,8 +21,17 @@ public class OutputJson {
 		genAllJson();
 		genManJson();
 		genWomanJson();
+		genTopics();
 //		Topic t=DBUtil.instance.getTopic("1903717109");
 //		genTopicJson(t);
+	}
+	public static void genTopics() throws Exception{
+		List<Topic> all=DBUtil.instance.getAllTopic(NUM);
+		for(Topic t:all){
+			if(t.getOriginContent()!=null && !t.getOriginContent().equals("")){
+				genTopicJson(t);
+			}	
+		}
 	}
 	public static void genJson() throws Exception {
 		genAllJson();
