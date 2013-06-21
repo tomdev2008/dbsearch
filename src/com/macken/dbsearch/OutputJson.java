@@ -18,11 +18,11 @@ public class OutputJson {
 	public static int NUM = 30;
 
 	public static void main(String[] args) throws Exception {
-//		genAllJson();
-//		genManJson();
-//		genWomanJson();
-		Topic t=DBUtil.instance.getTopic("1903717109");
-		genTopicJson(t);
+		genAllJson();
+		genManJson();
+		genWomanJson();
+//		Topic t=DBUtil.instance.getTopic("1903717109");
+//		genTopicJson(t);
 	}
 	public static void genJson() throws Exception {
 		genAllJson();
