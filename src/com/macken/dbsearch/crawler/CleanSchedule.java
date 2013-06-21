@@ -42,7 +42,7 @@ public class CleanSchedule {
 							topic.topicContent = topicContent;
 							topic.originContent = originContent;
 							DBUtil.instance.updateTopicContent(topic);
-							OutputJson.genTopicJson(topic);
+//							OutputJson.genTopicJson(topic);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
