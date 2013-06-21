@@ -1,10 +1,9 @@
 package com.macken.dbsearch;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -19,41 +18,82 @@ public class OutputJson {
 	public static int NUM = 30;
 
 	public static void main(String[] args) throws Exception {
-		genAllJson();
-		genManJson();
-		genWomanJson();
+//		genAllJson();
+//		genManJson();
+//		genWomanJson();
+		Topic t=DBUtil.instance.getTopic("1903717109");
+		genTopicJson(t);
 	}
-	public static void genJson()throws Exception{
+	public static void genJson() throws Exception {
 		genAllJson();
 		genManJson();
 		genWomanJson();
 	}
 	public static void genAllJson() throws Exception {
 		List<Topic> all = DBUtil.instance.getAllTopic(NUM);
-		genJson("all.json", all);
+		genListJson("all.json", all);
 	}
 	public static void genManJson() throws Exception {
 		List<Topic> man = DBUtil.instance.getManTopic(NUM);
-		genJson("man.json", man);
+		genListJson("man.json", man);
 	}
 
 	public static void genWomanJson() throws Exception {
 		List<Topic> woman = DBUtil.instance.getWomenTopic(NUM);
-		genJson("woman.json", woman);
+		genListJson("woman.json", woman);
 	}
-	public static void genJson(String path, List<Topic> topic) throws Exception {
+	public static void genListJson(String path,Object object) throws Exception {
+		path=oPath+path;
+		genJson(path,object);
+		
+	}
+	public static void genJson(String path, Object object) throws Exception {
 		//		List<Topic> topic = DBUtil.instance.getAllTopic(NUM);
 		Gson gson = new Gson();
-		File f = new File(oPath);
+		File f = new File(path);
 		if (f.exists()) {
 			f.mkdirs();
 		}
 		//		FileWriter write = new FileWriter(new File(oPath));
-		OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(oPath + path), "UTF-8");
+		OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
 		//		BufferedWriter out = new BufferedWriter(write);
-		out.write(gson.toJson(topic));
+		out.write(gson.toJson(object));
 		out.close();
 		//		write.close();
+	}
+	public static void genTopicJson(Topic t) throws Exception{
+		String path=oPath+"data/"+t.id+".json";
+		genJson(path, t);
+	}
+	static class ListTopic {
+		String title;
+		String link;
+		String userName;
+		long createTime;
+	}
+	static class TopicJson {
+		String title;
+		String link;
+		String content;
+	}
+	public List<ListTopic> convertToJsonObject(List<Topic> topic) {
+		List<ListTopic> res = new ArrayList<ListTopic>();
+		for (Topic t : topic) {
+			ListTopic lt = new ListTopic();
+			lt.title = t.title;
+			lt.link = t.link;
+			lt.userName = t.userName;
+			lt.createTime = t.createTime;
+			res.add(lt);
+		}
+		return res;
+	}
+	public TopicJson convertToJsonTopic(Topic t) {
+		TopicJson tj = new TopicJson();
+		tj.title = t.title;
+		tj.link = t.link;
+		tj.content = t.originContent;
+		return tj;
 	}
 
 }
