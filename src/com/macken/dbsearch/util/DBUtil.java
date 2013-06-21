@@ -114,5 +114,26 @@ public class DBUtil {
 		List<Topic> list = DaoSupport.db.query(sql, Topic.rowMapper);
 		return list;
 	}
+	public Topic getNoContentTopic() {
+		String sql = "select * from topic_info where topic_content is null order by create_time desc limit 0,10";
+		List<Topic> list = DaoSupport.db.query(sql, Topic.rowMapper);
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+	public boolean updateTopicContent(Topic t) {
+		String sql = "update topic_info set topic_content=?,origin_content=? where id=?";
+		int rows = DaoSupport.db.update(sql, t.topicContent, t.originContent, t.id);
+		return rows > 0;
+	}
+	public Topic getTopic(String id){
+		String sql="select * from topic_info where id=?";
+		List<Topic> t=DaoSupport.db.query(sql, Topic.rowMapper, id);
+		if(t!=null && t.size()>0){
+			return t.get(0);
+		}
+		return null;
+	}
 
 }

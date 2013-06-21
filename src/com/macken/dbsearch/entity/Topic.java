@@ -20,6 +20,8 @@ public class Topic {
 	public long topicTime;
 	public String userId;
 	public String userName;
+	public String topicContent;
+	public String originContent;
 
 	public String getId() {
 		return id;
@@ -107,6 +109,24 @@ public class Topic {
 	public void setCreateTimeStr(String createTimeStr) {
 		this.createTimeStr = createTimeStr;
 	}
+	
+	
+	public String getTopicContent() {
+		return topicContent;
+	}
+
+	public void setTopicContent(String topicContent) {
+		this.topicContent = topicContent;
+	}
+
+	public String getOriginContent() {
+		return originContent;
+	}
+
+	public void setOriginContent(String originContent) {
+		this.originContent = originContent;
+	}
+
 
 
 
@@ -123,6 +143,8 @@ public class Topic {
 			t.topicTime=rs.getLong("topic_time");
 			t.userId=rs.getString("user_id");
 			t.userName=rs.getString("user_name");
+			t.topicContent=rs.getString("topic_content");
+			t.originContent=rs.getString("origin_content");
 			return t;
 		}
 	};
