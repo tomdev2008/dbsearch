@@ -40,6 +40,7 @@ public class CleanSchedule {
 							topic.originContent = originContent;
 							DBUtil.instance.updateTopicContent(topic);
 							OutputJson.genTopicJson(topic);
+							
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
