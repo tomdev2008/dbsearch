@@ -120,7 +120,7 @@ public class CrawlerThread extends Thread {
 	}
 
 	public static void rsyncServer(Topic t) {
-		String cmd = "scp -r /search/dbsearch/html/json/data/" + t.id
+		String cmd = "rsync -e \"/usr/bin/ssh\" -vaz /search/dbsearch/html/json/data/" + t.id
 				+ ".json root@173.231.52.194:/search/html/json/data/";
 		FMUtil.exec(cmd);
 	}
