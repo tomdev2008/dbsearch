@@ -15,7 +15,7 @@ public class OutputJson {
 			&& System.getProperty("os.name").toLowerCase().contains("windows");
 	public static String oPath = isWindows ? "D:\\output\\json\\" : "/search/dbsearch/html/json/";
 
-	public static int NUM = 30;
+	public static int NUM = 50;
 
 	public static void main(String[] args) throws Exception {
 		genAllJson();
