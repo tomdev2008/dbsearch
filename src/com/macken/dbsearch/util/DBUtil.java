@@ -127,13 +127,18 @@ public class DBUtil {
 		int rows = DaoSupport.db.update(sql, t.topicContent, t.originContent, t.id);
 		return rows > 0;
 	}
-	public Topic getTopic(String id){
-		String sql="select * from topic_info where id=?";
-		List<Topic> t=DaoSupport.db.query(sql, Topic.rowMapper, id);
-		if(t!=null && t.size()>0){
+	public Topic getTopic(String id) {
+		String sql = "select * from topic_info where id=?";
+		List<Topic> t = DaoSupport.db.query(sql, Topic.rowMapper, id);
+		if (t != null && t.size() > 0) {
 			return t.get(0);
 		}
 		return null;
+	}
+	public boolean updateUserInfo(String location, String locationUrl, String userId) {
+		String sql = "update user_info set location=?,location_url=? where user_id=?";
+		int rows = DaoSupport.db.update(sql, location, locationUrl, userId);
+		return rows > 0;
 	}
 
 }

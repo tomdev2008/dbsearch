@@ -89,6 +89,7 @@ public class CrawlerThread extends Thread {
 					DBUtil.instance.addUser(user);
 					Thread.sleep(10*1000);
 					CleanSchedule.cleanTopic(t);
+					CleanSchedule.cleanUser(t);
 				}
 
 			}
