@@ -12,6 +12,7 @@ import com.macken.dbsearch.entity.User;
 import com.macken.dbsearch.util.CheckUtil;
 import com.macken.dbsearch.util.DBUtil;
 import com.macken.dbsearch.util.DateUtil;
+import com.macken.dbsearch.util.FMUtil;
 import com.macken.dbsearch.util.HashUtil;
 import com.macken.dbsearch.util.HttpUtil;
 
@@ -42,7 +43,7 @@ public class CrawlerThread extends Thread {
 		}
 
 		System.out.println("group:" + link);
-		//			System.out.println(content);
+		// System.out.println(content);
 		TagNode root = HttpUtil.getCleanTagNode(content);
 		try {
 			Object[] nodes = root.evaluateXPath(Config.TABLEXPATH);
@@ -50,22 +51,18 @@ public class CrawlerThread extends Thread {
 				Topic t = new Topic();
 				t.type = 0;
 				TagNode n = (TagNode) nodes[i];
-				//获取标题 链接
+				// 获取标题 链接
 				Object[] sns = n.evaluateXPath("//td[1]/a");
 				if (sns.length > 0) {
 					TagNode linkNode = (TagNode) sns[0];
 					t.link = linkNode.getAttributeByName("href");
 					t.title = linkNode.getAttributeByName("title");
-					if (CheckUtil.checkWords(t.title)) {
-						t.type = 1;
-					} else if (CheckUtil.checkWomenWords(t.title)) {
-						t.type = 2;
-					}
+					t.type = CheckUtil.checkTitle(t.title);
 
 				} else {
 					continue;
 				}
-				//获取用户信息
+				// 获取用户信息
 				sns = n.evaluateXPath("//td[2]/a");
 				if (sns.length > 0) {
 					TagNode userNode = (TagNode) sns[0];
@@ -76,7 +73,8 @@ public class CrawlerThread extends Thread {
 				}
 				String titleHash = HashUtil.getHash(t.title);
 				String id = HashUtil.getHash(t.link);
-				if (t.type != 0 && !DBUtil.instance.exists(id) && !DBUtil.instance.existsTitle(titleHash)) {
+				if (t.type != 0 && !DBUtil.instance.exists(id)
+						&& !DBUtil.instance.existsTitle(titleHash)) {
 					t.createTime = System.currentTimeMillis();
 					t.dateStr = dateStr;
 					t.titleHash = titleHash;
@@ -85,11 +83,13 @@ public class CrawlerThread extends Thread {
 					User user = new User();
 					user.userId = t.userId;
 					user.userName = t.userName;
-					System.out.println(t.link + "\t" + t.userName + "\t" + t.userId);
+					System.out.println(t.link + "\t" + t.userName + "\t"
+							+ t.userId);
 					DBUtil.instance.addUser(user);
-					Thread.sleep(10*1000);
+					Thread.sleep(10 * 1000);
 					CleanSchedule.cleanTopic(t);
 					CleanSchedule.cleanUser(t);
+					rsyncServer(t);
 				}
 
 			}
@@ -100,10 +100,12 @@ public class CrawlerThread extends Thread {
 			e.printStackTrace();
 		}
 	}
+
 	public String getUserId(String link) {
 		String[] arr = link.trim().split("/");
 		return arr[arr.length - 1];
 	}
+
 	public boolean isGoOn(Group g) {
 		long low = 10 * 1000;
 		long day = 12 * 3600 * 1000;
@@ -117,9 +119,16 @@ public class CrawlerThread extends Thread {
 
 		return false;
 	}
+
+	public static void rsyncServer(Topic t) {
+		String cmd = "rsync -e \"/usr/bin/ssh\" -vaz /search/dbsearch/html/json/data/" + t.id
+				+ ".json root@173.231.52.194:/search/html/json/data/";
+		FMUtil.exec(cmd);
+	}
+
 	public static void main(String[] args) {
 		String link = "http://www.douban.com/group/topic/40409903/";
-		//		CrawlerThread ct = new CrawlerThread("");
-		//		ct.getUserId(link);
+		// CrawlerThread ct = new CrawlerThread("");
+		// ct.getUserId(link);
 	}
 }

@@ -15,7 +15,7 @@ public class OutputJson {
 			&& System.getProperty("os.name").toLowerCase().contains("windows");
 	public static String oPath = isWindows ? "D:\\output\\json\\" : "/search/dbsearch/html/json/";
 
-	public static int NUM = 30;
+	public static int NUM = 50;
 
 	public static void main(String[] args) throws Exception {
 		genAllJson();
@@ -81,6 +81,7 @@ public class OutputJson {
 		String title;
 		String link;
 		String userName;
+		String uid;
 		long createTime;
 	}
 	static class TopicJson {
@@ -96,7 +97,9 @@ public class OutputJson {
 			lt.title = t.title;
 			lt.link = t.link;
 			lt.userName = t.userName;
+			lt.uid=t.getUserId();
 			lt.createTime = t.createTime;
+			
 			res.add(lt);
 		}
 		return res;

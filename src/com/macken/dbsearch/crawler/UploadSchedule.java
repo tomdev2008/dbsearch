@@ -12,7 +12,8 @@ public class UploadSchedule {
 		try {
 			FMUtil.gen();
 			OutputJson.genJson();			
-			FMUtil.exec("scp -r /search/dbsearch/html/ root@173.231.52.194:/search/");
+//			FMUtil.exec("scp -r /search/dbsearch/html/ root@173.231.52.194:/search/");
+			FMUtil.exec("rsync -e \"/usr/bin/ssh\" -vaz /search/dbsearch/html root@173.231.52.194:/search");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
