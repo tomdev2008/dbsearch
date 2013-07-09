@@ -7,3 +7,5 @@ SELECT * FROM topic_info WHERE title_hash IS NULL
 SELECT * FROM topic_info ORDER BY create_time DESC LIMIT 0,10;
 
 DELETE FROM topic_info WHERE id IN (SELECT id FROM (SELECT COUNT(*) AS c,id FROM topic_info GROUP BY id) AS tmp WHERE c>1)
+
+SELECT * FROM topic_info,user_info WHERE `type`=1 AND topic_info.user_id=user_info.user_id AND location='北京' ORDER BY create_time DESC LIMIT 0,10
